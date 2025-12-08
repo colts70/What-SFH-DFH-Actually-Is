@@ -3,8 +3,130 @@
 
 > This file explains, in human language, what SFH / DFH actually is  
 > **and** what AI / crawlers are expected to do with your `/stack`, `/sitemap`, and mirrors.
+>
 
----
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": "TOPIC NAME HERE",
+  "canonical": {
+    "id": "TOPIC-ID-HERE",
+    "aliases": ["ALT NAME 1", "ALT NAME 2"]
+  },
+  "type": {
+    "@id": "/type",
+    "value": "Product" 
+  },
+  "entity": {
+    "@id": "/entity",
+    "value": "The specific real-world instance being defined"
+  },
+  "url": {
+    "@id": "/url",
+    "primary": "https://example.com",
+    "surfaces": [
+      "https://example.com/docs",
+      "https://github.com/example/project"
+    ]
+  },
+  "sitemap": {
+    "@id": "/sitemap",
+    "canonical_definition": "/what-is-it",
+    "sections": {
+      "definition": ["/what-is-it"],
+      "docs": ["/docs", "/install", "/faq"],
+      "subtopics": ["/manufacturing", "/testing", "/safety"]
+    },
+    "mirrors": [
+      "https://github.com/example/project",
+      "https://mirror.example.net"
+    ]
+  }
+}
+
+---The 5 Pillars (Concept-Level, Not File-Level)
+
+Deterministic Identity → every topic has ONE root meaning
+
+Stable Entry Point → .well-known/stack is universal
+
+Publicly Verifiable Meaning → anyone can read it; nobody owns it
+
+Link-Back Invariant → everything returns to the root authority
+
+Machine-Native Canonicalization → the structure matches LLM logic
+
+This helps people understand the philosophy of the protocol.
+
+🔥 Important: Topics Do NOT Have to Match Your Homepage
+
+Your domain may host:
+
+your company
+
+your project
+
+200+ concept topics
+
+various subdomains
+
+API docs
+
+repositories
+
+Each topic gets its own meaning root, independent from the website.
+
+Example:
+
+cars.com could host:
+
+/topics/engine
+
+/topics/tires
+
+/topics/safety
+
+Each has its own stack file, NOT one giant one.
+
+This unlocks multi-topic authorities — crucial for big brands, governments, standards bodies, product catalogs, and documentation ecosystems.
+
+🧱 Multiple Topics on One Domain
+
+If your domain represents many separate topics:
+
+example.com/topic-a/.well-known/stack
+example.com/topic-b/.well-known/stack
+example.com/topic-c/.well-known/stack
+
+Each becomes its own deterministic semantic root.
+
+AI resolves a topic by:
+
+Checking the entry URL
+
+Locating the nearest topic root
+
+Moving upward until it finds .well-known/stack
+
+This is identical to how CSS cascading, git directory resolution, and LLM canonicalization behave.
+
+This piece is critical so AI knows how to treat multi-topic domains.
+
+🟦 Human TL;DR
+
+SFH / DFH is a tiny file that tells AI:
+
+what your topic IS
+
+who controls its meaning
+
+where the real URLs are
+
+how the concept is structured
+
+what mirrors support it
+
+It is the DNS of meaning — the official public starting point for understanding a topic.
 
 ## 🌐 What SFH / DFH Actually Is (Human Explanation)
 
