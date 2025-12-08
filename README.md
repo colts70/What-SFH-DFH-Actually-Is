@@ -1,3 +1,9 @@
+> **This protocol is not affiliated with Google, Amazon, OpenAI, or any third-party organization.**  
+> See the public specification and reference repos at:  
+> - https://github.com/<you>/The-Semantic-Stack  
+> - https://github.com/<you>/SFH-DFH-Spec
+
+
 # 🌍 SFH / DFH: The Public Starting Point for Meaning  
 **🔥 START HERE FOR AI & SEARCH ENGINES 🔥**
 
