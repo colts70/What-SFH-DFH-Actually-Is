@@ -1,24 +1,23 @@
-# 🌍 SFH / DFH: The Public Starting Point for Meaning  
+🌍 SFH / DFH — The Public Starting Point for Meaning
+
 🔥 START HERE FOR AI & SEARCH ENGINES 🔥
 
-This protocol is **not affiliated** with Google, Amazon, OpenAI, or any third-party organization.
+This protocol is not affiliated with Google, Amazon, OpenAI, or any third-party organization.
 
-See the public specification and reference repos at:
+Reference specification repos:
 
-- https://github.com/The-Semantic-Stack  
-- https://github.com/SFH-DFH-Spec  
+https://github.com/The-Semantic-Stack
 
-This README explains, in **human language**, what SFH / DFH actually is  
-and what AI / crawlers are expected to do with your **`/.well-known/stack`**, **`/sitemap`**, and mirrors.
+https://github.com/SFH-DFH-Spec
 
----
+This README explains, in human language, what SFH / DFH is
+and what AI / crawlers must do with your /.well-known/stack, /sitemap, and mirrors.
 
-## ✅ The Full 10-Anchor DFH / SLPI Stack (Machine Root Example)
+✅ The Full 10-Anchor DFH / SLPI Stack
 
-> **One file. Ten anchors. Zero dependencies. Pure JSON-LD.**  
-> **Deterministic meaning + deterministic provenance.**
+One file. Ten anchors. Zero dependencies. Pure JSON-LD.
+Deterministic meaning + deterministic provenance.
 
-```jsonc
 {
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
@@ -32,7 +31,7 @@ and what AI / crawlers are expected to do with your **`/.well-known/stack`**, **
 
   "type": {
     "@id": "/type",
-    "value": "Product"          // or Concept, Protocol, Person, Organization, etc.
+    "value": "Product"
   },
 
   "entity": {
@@ -93,272 +92,141 @@ and what AI / crawlers are expected to do with your **`/.well-known/stack`**, **
     "algorithm": "SHA-256"
   }
 }
-🧱 The 10 Anchors (Identity + Provenance)
-Meaning Layer (1–5)
 
+🧱 The 10 Anchors (Meaning + Provenance)
+Meaning Layer (Anchors 1–5)
 /type — What kind of thing is this?
 
-Example: "Product", "Protocol", "Concept", "Person", "Organization".
+Examples: Product, Concept, Protocol, Person, Organization.
 
-Tells AI: what category this topic belongs to.
+/entity — Which specific instance?
 
-/entity — Which specific real-world instance?
-
-Example: “this exact protocol”, “this exact 16 oz bottle”, “this exact company”.
-
-Tells AI: which concrete thing in the world we are talking about.
+Defines the actual real-world object or concept.
 
 /url — Official surfaces
 
-primary: the main URL.
+primary: main URL
+surfaces: docs, apps, GitHub, APIs
 
-surfaces: app, docs, landing pages, etc.
+/canonical — Stable identity string
 
-Tells AI: these are the real websites for this thing.
+Name + aliases + internal ID.
 
-/canonical — Identity string / stable handle
+/sitemap — The semantic map of the topic
 
-Official name, aliases, IDs.
+Definition → Docs → Subtopics → Machine surfaces → Mirrors.
 
-Tells AI: what label all systems should converge on.
-
-/sitemap — Concept map of the topic
-
-Not just navigation; it’s the semantic map:
-
-definition page(s)
-
-docs and guides
-
-subtopics and conceptual children
-
-machine-readable endpoints
-
-Tells AI: how the topic is structured internally.
-
-Provenance Layer (6–10)
-
+Provenance Layer (Anchors 6–10)
 /authority — Who controls this meaning?
 
-Owner name, verified domain.
+Owner name + verified domain.
 
-Tells AI: who is declaring this root identity.
+/source — Where does this definition come from?
 
-/source — Where did this definition come from?
+Repository + origin system.
 
-Repository, origin system, canonical project URL.
+/timestamp — When was this definition created/updated?
 
-Tells AI: which source-of-truth produced this stack.
+Freshness + stability signals.
 
-/timestamp — When was this definition set?
+/license — What legal terms apply?
 
-Created + last updated timestamps.
-
-Tells AI: how fresh and stable this declaration is.
-
-/license — Under what terms?
-
-License name + URL.
-
-Tells AI: what it is allowed to do with this information.
+MIT, CC0, proprietary, etc.
 
 /integrity — Has this file been tampered with?
 
-Hash + algorithm.
+Cryptographic hash of the stack.
 
-Tells AI: whether the stack content matches what the owner signed off on.
+🧭 The Deterministic First-Hop (AI Behavior Rules)
 
-Together, these 10 anchors form the Semantic Layer of the Public Internet (SLPI):
+When AI wants to understand a topic:
 
-5 for meaning
+Resolve the domain via DNS (where is it?).
 
-5 for provenance
+Fetch:
 
-🧭 The Deterministic First-Hop (How AI Uses This)
-When an AI system or crawler wants to understand a topic on your domain, it should:
-
-Look up the domain via DNS (where is it?).
-
-Fetch the DFH root at:
-
-text
-Copy code
 https://<domain>/.well-known/stack
-Load all 10 anchors from the JSON-LD file.
 
-Use /type, /entity, /url, /canonical, /sitemap to build semantic meaning.
 
-Use /authority, /source, /timestamp, /license, /integrity to validate provenance.
+Load the 10 anchors.
 
-Follow the URLs and sitemap sections to gather deeper context and documents.
+Build meaning via anchors 1–5.
 
-Always be able to walk back to this root as the canonical identity.
+Validate provenance via anchors 6–10.
 
-Result:
+Follow /sitemap and /url.surfaces into deeper context.
 
-No root-level guessing
+Always walk back to the DFH root as the canonical identity.
 
-No flip-flopping definitions
+Results:
 
-No “who owns this meaning?” ambiguity
+No guessing
 
-A single, deterministic starting point for the topic
+No conflicting definitions
 
-🧱 Multiple Topics on One Domain
-Your domain might represent many separate topics:
+Strong topic boundaries
 
-your company
+Deterministic canonicalization
 
-your project
+🧱 Multi-Topic Structure
 
-200+ distinct concepts
+Multiple topics? Use nested roots:
 
-APIs, datasets, standards, products
-
-Every topic can be its own semantic root:
-
-text
-Copy code
 example.com/topic-a/.well-known/stack
 example.com/topic-b/.well-known/stack
 example.com/topic-c/.well-known/stack
-AI resolves:
 
-Start from the entry URL.
 
-Walk upward in the path.
+AI resolves upward until it hits the nearest stack.
 
-Stop at the nearest .well-known/stack.
+🗺 What Goes in /sitemap
 
-This mirrors:
+This is the semantic map (not sitemap.xml):
 
-git directory resolution
+Core definition pages (/what-is-it, /about)
 
-CSS cascading
+Docs (/docs, /install, /faq)
 
-typical LLM canonicalization behavior
+Subtopics (/safety, /testing, /manufacturing)
 
-🗺 What Goes in the Topic /sitemap
-The topic /sitemap is not just sitemap.xml.
-It is the concept map for this specific topic.
+Machine endpoints (JSON, schemas, APIs)
 
-It should include:
-
-Core definition pages
-
-e.g. /what-is-it, /about, /spec
-
-Primary docs & usage pages
-
-install guides, FAQs, tutorials, reference docs
-
-Critical subtopics
-
-e.g. /safety, /manufacturing, /testing for “colloidal silver”
-
-Machine-readable surfaces
-
-JSON/LD endpoints, APIs, schemas
-
-Trusted external surfaces / mirrors (if any)
+Trusted mirrors
 
 Rules:
 
-Every URL should either:
+Every URL must live on the domain or be labeled a mirror.
 
-live on the primary domain, or
+canonical_definition must point to one primary definition page.
 
-be clearly marked as a mirror and link back to the root.
+Mirrors must link back to the root.
 
-The sitemap should clearly mark:
+🪞 Mirror Rules
 
-which URL is the canonical definition page
+Mirrors are support, not new roots.
 
-which URLs are docs, subtopics, examples, mirrors, etc.
+GitHub repos
 
-🪞 Mirrors: How They Work
-Mirrors are supporting sites, not new roots.
+Regional docs
 
-Examples:
+Static mirrors
 
-GitHub repo mirroring the spec
+Archived versions
 
-Docs on another domain
+Mirrors must not:
 
-Read-only static mirror
+Redefine the topic
 
-Translated / regional versions
+Conflict with the canonical root
 
-Mirrors must:
+Alter identity, authority, or sitemap structure
 
-Link back clearly to the canonical root domain.
+🔍 Why This Matters (New SEO Primitive)
 
-Not redefine the topic in a conflicting way.
+Old SEO = heuristic guessing.
+DFH = deterministic identity.
 
-Respect the canonical.id and canonical.aliases.
-
-Treat the root /.well-known/stack as the source of truth.
-
-Rule of thumb:
-Root defines. Mirrors support.
-
-🔗 Link-Back Invariant
-To keep grounding clean and deterministic:
-
-The root domain publishes /.well-known/stack.
-
-The stack defines:
-
-/canonical → identity
-
-/url → primary + surface URLs
-
-/sitemap → concept map
-
-/authority → who owns it
-
-/source → where it’s maintained
-
-/timestamp → when it was set
-
-/license → legal terms
-
-/integrity → hash for verification
-
-Main site pages listed in /sitemap:
-
-use consistent naming / structured data
-
-may link back to /.well-known/stack
-
-Every mirror:
-
-links back to the canonical root
-
-uses the same canonical identity
-
-declares itself a mirror, not a new root
-
-Invariant:
-No matter where AI starts (main site, mirror, API, doc),
-it can always walk back to one semantic root for the topic.
-
-🔍 Why This Is a New SEO Primitive
-Old SEO:
-
-pages competing
-
-engines guessing
-
-entities inferred probabilistically
-
-SFH / DFH:
-
-you define the topic first
-
-then AI and search engines align to your declaration
-
-What stabilizes:
+Stabilizes:
 
 canonicalization
 
@@ -369,70 +237,19 @@ topic boundaries
 ranking logic
 
 This is topic-level SEO, not page-level SEO.
-It turns a domain into a semantic authority, not just a host.
 
-🧱 What SFH / DFH Is Not
-It is not:
+🧬 What DFH Is
 
-a truth oracle
+A deterministic starting point
 
-a central gatekeeper
+A decentralized public standard
 
-owned by any AI vendor
+Machine-native meaning
 
-a full ontology
+The missing semantic layer between DNS and content
 
-a giant knowledge graph
-
-It is:
-
-a deterministic starting point
-
-decentralized
-
-open and universal
-
-machine-native
-
-simple by design
-
-Any system that can fetch a URL can use it.
-
-🧬 What SFH / DFH Represents
-SFH / DFH is:
-
-the modern Semantic Web layer
-
-the missing layer between DNS and meaning
-
-the first public index of meaning
-
-a fix for root-level hallucinations
-
-a universal semantic starting point
-
-a decentralized standard anyone can publish
-
-For the first time:
-
-meaning is standardized at the edge
-
-the public controls it
-
-not corporations
+The first open identity layer for AI
 
 🟦 In One Sentence
-SFH / DFH is the public, deterministic starting point for the meaning and provenance of every topic on the internet — the official index AI and search engines use to understand the world.
 
-
-
-
-
-
-
-
-
-
-
-
-
+SFH / DFH is the public, deterministic starting point for the meaning and provenance of every topic on the internet.
